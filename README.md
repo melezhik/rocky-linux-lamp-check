@@ -63,6 +63,19 @@ sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --bootstra
 sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color
 ```
 
+Sample output
+
+```
+08:19:22 :: [repository] - index updated from http://sparrowhub.io/repo/api/v1/index
+[task run: task.bash - install package(s): nano.perl]
+[task stdout]
+08:19:39 :: trying to install nano ...
+08:19:39 :: os - rocky
+08:19:39 :: installer - yum
+08:19:41 :: Installed Packages
+08:19:41 :: nano.x86_64                        2.9.8-3.el8_10                        @baseos
+```
+
 # See also
 
 https://docs.rockylinux.org/guides/cms/wordpress-on-lamp/
