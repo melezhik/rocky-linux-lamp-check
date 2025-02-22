@@ -3,6 +3,9 @@ set -e
 mysql_root_password=$(config mysql_root_password)
 mysql_wp_password=$(config mysql_wp_password)
 
+echo "mysql_root_password: ${mysql_root_password}"
+echo "mysql_wp_password: ${mysql_wp_password}"
+
 sudo dnf upgrade -y
 
 sudo dnf install httpd -y

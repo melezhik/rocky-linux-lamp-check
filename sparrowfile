@@ -1,6 +1,9 @@
 #!raku
 
-task-run "files/tasks/lamp";
+task-run "files/tasks/lamp", %(
+  :mysql_root_password(config()<mysql_root_password>),
+  :mysql_wp_password(config()<mysql_wp_password>),
+);
 
 bash "curl -Lfs -D - http://127.0.0.1", %(
   description => "http check for WP localhost",
