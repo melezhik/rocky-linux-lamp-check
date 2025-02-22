@@ -67,3 +67,27 @@ CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY "$mysql_wp_password"
 GRANT ALL PRIVILEGES ON LOCALDEVELOPMENTENV.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 EOS
+
+sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+
+set -x 
+
+sudo sed -i -e 's/database_name_here/LOCALDEVELOPMENTENV/g' /var/www/html/wp-config.php
+
+sudo sed -i -e 's/username_here/admin/g' /var/www/html/wp-config.php
+
+sudo sed -i -e "s/password_here/$mysql_wp_password/g" /var/www/html/wp-config.php
+
+set -x
+
+# firewall-cmd installation was missed in original playbook
+sudo dnf install firewalld -y
+
+# skipping setting firewall rules as they require
+# FirewallD running and this may block ssh traffic
+# sudo firewall-cmd --add-service=http --add-service=https
+# sudo systemctl reload firewalld
+
+sudo chcon -R -t httpd_sys_rw_content_t /var/www/html/ 
+
+sudo setsebool -P httpd_can_network_connect true
