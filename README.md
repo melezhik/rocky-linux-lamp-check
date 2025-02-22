@@ -60,7 +60,7 @@ sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --bootstra
 ## Run test
 
 ```
-sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color
+sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --no_sudo --color
 ```
 
 Sample output

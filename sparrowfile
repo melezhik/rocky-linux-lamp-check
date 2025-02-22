@@ -1,1 +1,3 @@
-package-install "nano";
+#!raku
+
+task-run "files/tasks/lamp";
