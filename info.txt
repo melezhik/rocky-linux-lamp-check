@@ -1,0 +1,4 @@
+https://niekdeschipper.com/projects/cloud-init.html
+https://cloudinit.readthedocs.io/en/latest/howto/launch_qemu.html
+https://serverfault.com/questions/576615/os-x-equivalents-for-ubuntus-genisoimage-and-qemu-img
+https://gist.github.com/jtpaasch/cb7da88c890a002ab3ae464ca98c7445

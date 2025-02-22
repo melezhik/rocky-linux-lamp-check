@@ -1,0 +1,10 @@
+#cloud-config
+users:
+  - default
+  - name: admin
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    lock_passwd: false
+    plain_text_passwd: password
+    ssh_authorized_keys:
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpBIMDrG+3U+FwkiFUpM0q5DL1PqWitdOLV+mFB424+EJhdfhOEx5CGiP8bpf/tiStgUWyg3bIFg3WCO6cZkC2xkCFaov942zPaIw1HeV1qlhEsjsyqLhY21TO9LBr5aQIcC21aVpyBbY8Pt/AYIyEaNZlg64TIr40Bh4vqDP3vDwj0LbcMwdmRZRQCuyhqtzp7BD/FwNjFuswrz8c+90atTj7ohW+YbteTGYHfzAXmTRM9XR9k4phcRrk8keVuas/9hPS5erB5c9viLqp+cetDxxAjh205FBpre1ktlltzALTq3mZ+fHoWutVWcUZzBPB++KdnwziPHxHDDtii6BzZ60BgXuPLAwwnwFLR5DH3V9WeEaDdwyxTePnc59nPnAGZSAEmeW88xURWEQ76HpZ9ckInAhDCe8QPqShGAMLM4qVVDqdEb6VkNmcteuzGdIAOXSHNhvR2QhRDJa5ltExFgBmzOJXWw2HW5pbZ5BYaY+wZ4VEEoCKI15OyN1321U= user@users-MacBook-Pro.local
