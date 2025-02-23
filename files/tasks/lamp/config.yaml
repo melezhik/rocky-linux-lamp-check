@@ -1,2 +1,2 @@
-mysql_root_password: root123
-mysql_wp_password: wp1234
+mysql_root_password: complex_password
+mysql_wp_password: wp_password

@@ -1,4 +1,0 @@
-%(
-  :mysql_root_password<complex_password>,
-  :mysql_wp_password<wp_password>,
-);
