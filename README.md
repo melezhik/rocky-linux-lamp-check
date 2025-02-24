@@ -155,7 +155,6 @@ Please also read comment inside task.bash file, some tweaks have been made to ma
 ## Sample test report 
 
 ```
-users-MacBook-Pro:rl user$ sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --no_sudo
 18:27:08 :: [repository] - index updated from http://sparrowhub.io/repo/api/v1/index
 [task run: task.bash - files/tasks/lamp]
 [task stdout]
