@@ -155,14 +155,67 @@ Please also read comment inside task.bash file, some tweaks have been made to ma
 ## Sample test report 
 
 ```
-08:19:22 :: [repository] - index updated from http://sparrowhub.io/repo/api/v1/index
-[task run: task.bash - install package(s): nano.perl]
+users-MacBook-Pro:rl user$ sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --no_sudo
+18:27:08 :: [repository] - index updated from http://sparrowhub.io/repo/api/v1/index
+[task run: task.bash - files/tasks/lamp]
 [task stdout]
-08:19:39 :: trying to install nano ...
-08:19:39 :: os - rocky
-08:19:39 :: installer - yum
-08:19:41 :: Installed Packages
-08:19:41 :: nano.x86_64                        2.9.8-3.el8_10                        @baseos
+18:27:24 :: Last metadata expiration check: 1:08:37 ago on Sat 22 Feb 2025 05:18:47 PM UTC.
+18:27:30 :: Dependencies resolved.
+18:27:30 :: Nothing to do.
+18:27:30 :: Complete!
+18:27:33 :: Last metadata expiration check: 1:08:46 ago on Sat 22 Feb 2025 05:18:47 PM UTC.
+18:27:39 :: Package httpd-2.4.37-65.module+el8.10.0+1938+3b7755d4.3.x86_64 is already installed.
+18:27:39 :: Dependencies resolved.
+18:27:39 :: Nothing to do.
+18:27:39 :: Complete!
+18:27:44 :: Last metadata expiration check: 1:08:57 ago on Sat 22 Feb 2025 05:18:47 PM UTC.
+18:27:49 :: Package mariadb-server-3:10.3.39-1.module+el8.8.0+1452+2a7eab68.x86_64 is already installed.
+18:27:49 :: Dependencies resolved.
+18:27:49 :: Nothing to do.
+18:27:49 :: Complete!
+18:27:50 :: mysql_secure_installation is already done, skip this step
+18:27:54 :: Last metadata expiration check: 1:09:07 ago on Sat 22 Feb 2025 05:18:47 PM UTC.
+18:27:59 :: Package php-7.2.24-1.module+el8.4.0+413+c9202dda.x86_64 is already installed.
+18:27:59 :: Package php-mysqlnd-7.2.24-1.module+el8.4.0+413+c9202dda.x86_64 is already installed.
+18:27:59 :: Package php-gd-7.2.24-1.module+el8.4.0+413+c9202dda.x86_64 is already installed.
+18:27:59 :: Package php-xml-7.2.24-1.module+el8.4.0+413+c9202dda.x86_64 is already installed.
+18:27:59 :: Package php-mbstring-7.2.24-1.module+el8.4.0+413+c9202dda.x86_64 is already installed.
+18:27:59 :: Dependencies resolved.
+18:27:59 :: Nothing to do.
+18:27:59 :: Complete!
+18:28:00 :: wp distro is copied, skip this step
+18:28:04 :: Last metadata expiration check: 1:09:17 ago on Sat 22 Feb 2025 05:18:47 PM UTC.
+18:28:09 :: Package firewalld-0.9.11-9.el8_10.noarch is already installed.
+18:28:09 :: Dependencies resolved.
+18:28:09 :: Nothing to do.
+18:28:09 :: Complete!
+[task stderr]
+18:28:22 :: ++ sudo sed -i -e s/database_name_here/LOCALDEVELOPMENTENV/g /var/www/html/wp-config.php
+18:28:22 :: ++ sudo sed -i -e s/username_here/admin/g /var/www/html/wp-config.php
+18:28:22 :: ++ sudo sed -i -e s/password_here/wp_password/g /var/www/html/wp-config.php
+18:28:22 :: ++ set -x
+18:28:22 :: ++ sudo dnf install firewalld -y
+18:28:22 :: ++ sudo chcon -R -t httpd_sys_rw_content_t /var/www/html/
+18:28:22 :: ++ sudo setsebool -P httpd_can_network_connect true
+[task run: task.bash - bash: http check for WP localhost]
+[task stdout]
+18:28:40 :: HTTP/1.1 302 Found
+18:28:40 :: Date: Sat, 22 Feb 2025 18:28:39 GMT
+18:28:40 :: Server: Apache/2.4.37 (Rocky Linux)
+18:28:40 :: X-Powered-By: PHP/7.2.24
+18:28:40 :: Expires: Wed, 11 Jan 1984 05:00:00 GMT
+18:28:40 :: Cache-Control: no-cache, must-revalidate, max-age=0
+18:28:40 :: X-Redirect-By: WordPress
+18:28:40 :: Location: http://127.0.0.1/wp-admin/install.php
+18:28:40 :: Content-Length: 0
+18:28:40 :: Content-Type: text/html; charset=UTF-8
+18:28:40 :: 
+18:28:41 :: task exit status: 1
+18:28:41 :: task bash: http check for WP localhost FAILED
+The spawned command 'ssh -l admin -q -o ConnectionAttempts=1 -o ConnectTimeout=5 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ServerAliveInterval=300 -o ServerAliveCountMax=2 -tt -p 10022  admin@127.0.0.1 bash --login .sparrowdo/env/default/.sparrowdo/sparrowrun.sh' exited unsuccessfully (exit code: 1, signal: 0)
+  in block <unit> at /Users/user/projects/rakudo/rakudo-moar-2024.12-01-macos-arm64-clang/share/perl6/site/resources/E566A9246E95BAE38B1E9E4CB59A597B5F43B839 line 13
+  in sub MAIN at /Users/user/projects/rakudo/rakudo-moar-2024.12-01-macos-arm64-clang/share/perl6/site/bin/sparrowdo line 3
+  in block <unit> at /Users/user/projects/rakudo/rakudo-moar-2024.12-01-macos-arm64-clang/share/perl6/site/bin/sparrowdo line 1
 ```
 
 # See also
