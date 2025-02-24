@@ -1,8 +1,40 @@
 # rocky-linux-lamp-check
 
-Check LAMP installation on Rocky Linux
+Check LAMP installation on Rocky Linux by running official playbook on virtual machine
 
-# Prepare test image
+# Dependencies
+
+- Any linux/MAC box with x86_64 arch
+
+- qemu
+
+- Rakudo
+
+- Sparrowdo
+
+
+- Test Rockylinux image in qcow2 format with ssh server installed 
+
+# Installation
+
+## Download image
+
+```
+wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base-8.10-20240528.0.x86_64.qcow2
+```
+
+## Prepare test image
+
+To override cloud init file and enable ssh passwordless access, one need to
+create custom user-data and insert ssh public to it
+
+Generate ssh key, copy public part
+
+```
+ssh-keygen
+```
+
+Create user-data, insert ssh key public part
 
 ```
 touch meta-data
@@ -16,12 +48,45 @@ users:
     lock_passwd: false
     plain_text_passwd: password
     ssh_authorized_keys:
-      ssh-rsa your_public_ssh_key
+      ssh-rsa <your_public_ssh_key> # e.g. usualy the content of ~/.ssh/id_rsa.pub file
 DATA
+
+# on MAC OS I use hdiutil to create iso image
+# use proper tool that comes with your OS
 hdiutil makehybrid -o init.iso -hfs -joliet -iso -default-volume-name cidata {user-data,meta-data}
 ```
 
-# Boot VM
+## Install Rakudo
+
+The most convenient way is [rakubrew.org](http://rakubrew.org)
+
+
+## Install Sparrowdo
+
+Once rakudo is installed it comes with zef package manager - tool to install Raku modules.
+
+Install Sparrowdo as Raku module
+
+```
+zef install --/test Sparrowdo
+```
+
+To check that sparrowdo is successfuly installed, run this:
+
+```
+s6 --help
+```
+
+The command above should succeed. In case you get an error that s6 is not found in PATH,
+consider adjusting PATH variable, by adding Raku modules bin/ path to it. 
+
+## Install qemu
+
+Choose proper tool available in your OS
+
+## Boot VM
+
+In separate console, run follwing command that should launch VM
 
 ```
 wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base-8.10-20240528.0.x86_64.qcow2
@@ -37,21 +102,29 @@ qemu-system-x86_64 \
 -nographic
 ```
 
+Check that VM is avaibale by ssh from localhost by running
+
+```
+ssh 127.0.0.1 -p 10022 -l admin
+```
+
+No password is required if user-data on previous step was set correctly. In case any issues try to log to VM  and troubleshoot, in using following creds:
+
+- login
+
+admin
+
+- password
+
+password
+
 # Run tests
 
-## Install
-
-* Rakudo 
-
-See https://rakudo.org/downloads
-
-* Sparrowdo
-
-```
-zef install Sparrowdo --/test
-```
-
 ## Bootstrap ssh host
+
+Bootstrap command will install Sparrow client on VM machine, this is required to
+run all further tests. Bootstrap needs to be exectuted only once. Be patient, for
+some slow VMs bootstrap might take a while
 
 ```
 sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --bootstrap
@@ -59,11 +132,23 @@ sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --bootstra
 
 ## Run test
 
+To run test just execute test scenario on VM using sparrowdo cli, provide proper ssh user
+and ssh port parameters.
+
 ```
 sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --no_sudo --color
 ```
 
-Sample output
+If test succeeds one will see no errors in test report, otherwise some errors will be shown.
+
+## Test scenario
+
+Sparrowdo test scenario is located in sparrowfile, right now it's invocation
+of as accurate as possible copy of official LAMP playbook, see tasks/files/lamp/task.bash
+
+Please also read comment inside task.bash file, some tweaks have been made to make scenario work on real VM
+
+## Sample test report 
 
 ```
 08:19:22 :: [repository] - index updated from http://sparrowhub.io/repo/api/v1/index
