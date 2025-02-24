@@ -6,14 +6,13 @@ Check LAMP installation on Rocky Linux by running official playbook on virtual m
 
 - Any linux/MAC box with x86_64 arch
 
+- Test Rockylinux image in qcow2 format, x86_64 arch, ssh server should be installed 
+
 - qemu
 
 - Rakudo
 
 - Sparrowdo
-
-
-- Test Rockylinux image in qcow2 format with ssh server installed 
 
 # Installation
 
@@ -53,13 +52,13 @@ DATA
 
 # on MAC OS I use hdiutil to create iso image
 # use proper tool that comes with your OS
+
 hdiutil makehybrid -o init.iso -hfs -joliet -iso -default-volume-name cidata {user-data,meta-data}
 ```
 
 ## Install Rakudo
 
-The most convenient way is [rakubrew.org](http://rakubrew.org)
-
+The most convenient way to install Rakudo is [rakubrew.org](http://rakubrew.org)
 
 ## Install Sparrowdo
 
@@ -86,7 +85,7 @@ Choose proper tool available in your OS
 
 ## Boot VM
 
-In separate console, run following command that should launch VM
+In separate console, run following command that launch VM with ssh port forwarding
 
 ```
 wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base-8.10-20240528.0.x86_64.qcow2
@@ -108,7 +107,9 @@ Check that VM is available by ssh from localhost by running
 ssh 127.0.0.1 -p 10022 -l admin
 ```
 
-No password is required if user-data on previous step was set correctly. In case any issues try to log to VM  and troubleshoot, in using following creds:
+No password is required if user-data on previous step was set correctly. 
+
+In case any issues try to log to VM  and troubleshoot, in using following creds:
 
 - login
 
