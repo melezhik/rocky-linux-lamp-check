@@ -48,7 +48,7 @@ users:
     lock_passwd: false
     plain_text_passwd: password
     ssh_authorized_keys:
-      ssh-rsa <your_public_ssh_key> # e.g. usualy the content of ~/.ssh/id_rsa.pub file
+      ssh-rsa <your_public_ssh_key> # e.g. usually the content of ~/.ssh/id_rsa.pub file
 DATA
 
 # on MAC OS I use hdiutil to create iso image
@@ -71,7 +71,7 @@ Install Sparrowdo as Raku module
 zef install --/test Sparrowdo
 ```
 
-To check that sparrowdo is successfuly installed, run this:
+To check that sparrowdo is successfully installed, run this:
 
 ```
 s6 --help
@@ -86,7 +86,7 @@ Choose proper tool available in your OS
 
 ## Boot VM
 
-In separate console, run follwing command that should launch VM
+In separate console, run following command that should launch VM
 
 ```
 wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Base-8.10-20240528.0.x86_64.qcow2
@@ -102,7 +102,7 @@ qemu-system-x86_64 \
 -nographic
 ```
 
-Check that VM is avaibale by ssh from localhost by running
+Check that VM is available by ssh from localhost by running
 
 ```
 ssh 127.0.0.1 -p 10022 -l admin
@@ -123,7 +123,7 @@ password
 ## Bootstrap ssh host
 
 Bootstrap command will install Sparrow client on VM machine, this is required to
-run all further tests. Bootstrap needs to be exectuted only once. Be patient, for
+run all further tests. Bootstrap needs to be executed only once. Be patient, for
 some slow VMs bootstrap might take a while
 
 ```
