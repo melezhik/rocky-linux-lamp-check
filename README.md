@@ -4,7 +4,7 @@ Check LAMP installation on Rocky Linux by running official playbook on virtual m
 
 # Dependencies
 
-- Any linux/MAC box with x86_64 arch
+- Any Linux/MacOS box with x86_64 arch
 
 - Test Rockylinux image in qcow2 format, x86_64 arch, ssh server should be installed 
 
@@ -59,6 +59,21 @@ hdiutil makehybrid -o init.iso -hfs -joliet -iso -default-volume-name cidata {us
 ## Install Rakudo
 
 The most convenient way to install Rakudo is [rakubrew.org](http://rakubrew.org)
+
+For example, on Mac OS:
+
+```
+curl https://rakubrew.org/install-on-macos.sh | sh
+rakubrew download moar-2025.02
+Downloading https://rakudo.org/dl/rakudo/rakudo-moar-2025.02-01-macos-arm64-clang.tar.gz
+Extracting
+Switching to moar-2025.02
+Done, moar-2025.02 installed
+raku -v
+Welcome to Rakudo™ v2025.02.
+Implementing the Raku® Programming Language v6.d.
+Built on MoarVM version 2025.02.
+```
 
 ## Install Sparrowdo
 
