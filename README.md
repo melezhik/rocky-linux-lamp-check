@@ -128,6 +128,8 @@ run all further tests. Bootstrap needs to be executed only once. Be patient, for
 some slow VMs bootstrap might take a while
 
 ```
+git https://github.com/melezhik/rocky-linux-lamp-check.git
+cd rocky-linux-lamp-check/
 sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --color --bootstrap
 ```
 
@@ -137,6 +139,7 @@ To run test just execute test scenario on VM using sparrowdo cli, provide proper
 and ssh port parameters.
 
 ```
+cd rocky-linux-lamp-check/
 sparrowdo --host=127.0.0.1 --ssh_port=10022 --ssh_user=admin  --no_sudo --color
 ```
 
