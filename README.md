@@ -25,7 +25,7 @@ wget https://dl.rockylinux.org/pub/rocky/8/images/x86_64/Rocky-8-GenericCloud-Ba
 ## Prepare test image
 
 To override cloud init file and enable ssh passwordless access, one need to
-create custom user-data and insert ssh public to it
+create custom user-data and insert ssh public key into it
 
 Generate ssh key, copy public part
 
