@@ -20,7 +20,7 @@ Check LAMP installation on Rocky Linux by running official playbook on virtual m
 
 ## Prerequisites 
 
-If control node under Rocky Linux use this
+On Rocky Linux
 
 ```
 sudo dnf install -y wget tar perl mkisofs bash-completion qemu-kvm vim
