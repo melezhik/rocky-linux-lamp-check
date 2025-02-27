@@ -10,11 +10,61 @@ Check LAMP installation on Rocky Linux by running official playbook on virtual m
 
 - qemu
 
+- kvm ( optional, but recommended for VM performance )
+
 - Rakudo
 
 - Sparrowdo
 
 # Installation
+
+## Prerequisites 
+
+If control node under Rocky Linux use this
+
+```
+sudo dnf install -y wget tar perl mkisofs bash-completion qemu-kvm vim
+```
+
+For other OS including Mac OS use similar package managers
+
+### Install Rakudo
+
+The most convenient way to install Rakudo is [rakubrew.org](http://rakubrew.org)
+
+For example, on Mac OS:
+
+```
+curl https://rakubrew.org/install-on-macos.sh | sh
+rakubrew download moar-2025.02
+Downloading https://rakudo.org/dl/rakudo/rakudo-moar-2025.02-01-macos-arm64-clang.tar.gz
+Extracting
+Switching to moar-2025.02
+Done, moar-2025.02 installed
+raku -v
+Welcome to Rakudo™ v2025.02.
+Implementing the Raku® Programming Language v6.d.
+Built on MoarVM version 2025.02.
+```
+
+### Install Sparrowdo
+
+Once rakudo is installed it comes with zef package manager - tool to install Raku modules.
+
+Install Sparrowdo as Raku module
+
+```
+zef install --/test Sparrowdo
+```
+
+To check that sparrowdo is successfully installed, run this:
+
+```
+s6 --help
+```
+
+The command above should succeed. In case you get an error that s6 is not found in PATH,
+consider adjusting PATH variable, by adding Raku modules bin/ path to it. 
 
 ## Download image
 
@@ -49,54 +99,19 @@ users:
     ssh_authorized_keys:
       ssh-rsa <your_public_ssh_key> # e.g. usually the content of ~/.ssh/id_rsa.pub file
 DATA
+```
 
-# on MAC OS I use hdiutil to create iso image
-# use proper tool that comes with your OS
+On Rocky Linux
 
+```
+genisoimage -output init.iso -V cidata -r -J user-data meta-data
+```
+
+On Mac OS
+
+```
 hdiutil makehybrid -o init.iso -hfs -joliet -iso -default-volume-name cidata {user-data,meta-data}
 ```
-
-## Install Rakudo
-
-The most convenient way to install Rakudo is [rakubrew.org](http://rakubrew.org)
-
-For example, on Mac OS:
-
-```
-curl https://rakubrew.org/install-on-macos.sh | sh
-rakubrew download moar-2025.02
-Downloading https://rakudo.org/dl/rakudo/rakudo-moar-2025.02-01-macos-arm64-clang.tar.gz
-Extracting
-Switching to moar-2025.02
-Done, moar-2025.02 installed
-raku -v
-Welcome to Rakudo™ v2025.02.
-Implementing the Raku® Programming Language v6.d.
-Built on MoarVM version 2025.02.
-```
-
-## Install Sparrowdo
-
-Once rakudo is installed it comes with zef package manager - tool to install Raku modules.
-
-Install Sparrowdo as Raku module
-
-```
-zef install --/test Sparrowdo
-```
-
-To check that sparrowdo is successfully installed, run this:
-
-```
-s6 --help
-```
-
-The command above should succeed. In case you get an error that s6 is not found in PATH,
-consider adjusting PATH variable, by adding Raku modules bin/ path to it. 
-
-## Install qemu
-
-Choose proper tool available in your OS
 
 ## Boot VM
 
@@ -116,15 +131,15 @@ qemu-system-x86_64 \
 -nographic
 ```
 
-Check that VM is available by ssh from localhost by running
+Check that VM is available by ssh from localhost by running in separate console
 
 ```
 ssh 127.0.0.1 -p 10022 -l admin
 ```
 
-No password is required if user-data on previous step was set correctly. 
+No password is required if user-data on previous step was set correctly. And you should be able to ssh log in.
 
-In case any issues try to log to VM  and troubleshoot, in using following creds:
+In case any issues try to log to VM via qemu console and troubleshoot, using following creds:
 
 - login
 
