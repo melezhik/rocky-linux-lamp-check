@@ -1,0 +1,7 @@
+#!raku
+
+task-run "files/tasks/lamp";
+
+bash "curl -Lfs -D - http://127.0.0.1", %(
+  description => "http check for WP localhost",
+);
